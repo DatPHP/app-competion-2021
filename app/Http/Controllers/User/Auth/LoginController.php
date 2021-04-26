@@ -14,11 +14,36 @@ class LoginController extends Controller
             return view('user.auth.login');
         }
 
+        /*
+        //default 
+
         $credentials = $request->only(['email', 'password']);
         if (Auth::attempt($credentials)) {
             return redirect()->route('home');
         } else {
             return redirect()->back()->withInput();
         }
+
+        */ 
+
+        $email = $request->email;
+        $password = $request->password;
+
+        if (Auth::attempt(['email' => $email, 'password' => $password, 'status' => 1])) {
+            // Authentication was successful...
+            return redirect()->route('home');
+        }else {
+            return redirect()->back()->withInput();
+        }
+
+        
+
     }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('home');
+    }
+
 }
