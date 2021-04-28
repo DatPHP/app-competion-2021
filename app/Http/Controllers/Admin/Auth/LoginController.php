@@ -22,4 +22,13 @@ class LoginController extends Controller
             return redirect()->back()->withInput();
         }
     }
+
+
+    public function logout()
+    {
+       
+             Auth::guard('admin')->logout();
+             return redirect()->route('admin.login');
+        
+    }
 }
