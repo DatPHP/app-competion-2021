@@ -41,6 +41,8 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('register', [RegisterController::class, 'showRegisterForm'])->name('register');
 Route::post('register', [RegisterController::class, 'storeUser']);
 
+
+
 /*
 GET/products,                      mapped to the index() method,
 POST /products,                  mapped to the store() method,
