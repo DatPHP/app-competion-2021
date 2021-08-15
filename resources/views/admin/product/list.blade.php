@@ -12,7 +12,7 @@
             <!-----
             <th>Ảnh sản phẩm</th>
             -------> 
-
+            <th>Giới tính</th>
             <th>Đăng bán</th>
             <th>Action</th>
         </tr>
@@ -22,6 +22,7 @@
             <td>{{ $p->name }}</td>
             <td class="text-right">{{ number_format($p->price) }}</td>
             <td>{{ $p->content }}</td>
+            <td>{{ $p->gender }}</td>
             <!------
             <td>
                 <img src="{{ Asset($p->image_path) }}" alt="{{ $p->name }}" width="120" height="120">

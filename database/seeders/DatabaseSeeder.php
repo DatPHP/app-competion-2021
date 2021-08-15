@@ -29,14 +29,13 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
+        
+        
         DB::table('users')->insert([
             [
                 'name' => 'User',
                 'email' => 'user@gmail.com',
                 'password' => bcrypt('admin123'),
-                'phone' => '0328089939',
-                'address' => '51 Nguyen Van Tiet Street , Thuan An City, Binh Duong Province',
-                'gender'=>'1',
                 'level' =>'1',
                 'status' => '1',
                 'roles' => 'regular',

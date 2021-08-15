@@ -10,7 +10,7 @@
             <th cope="col">Username</th>
             <th cope="col">email</th>
             <th cope="col">password</th>
-            <th cope="col">website</th>
+            <th cope="col">status</th>
             <th  cope="col" colspan="4">Action</th>
 
     </tr>
@@ -22,7 +22,7 @@
                 <td><?php echo e($item['name']); ?></td>
                 <td><?php echo e($item['email']); ?></td>
                 <td><?php echo e($item['password']); ?></td>
-                <td><?php echo e($item['website']); ?></td>
+                <td><?php echo e($item['status']); ?></td>
                 <td colspan="4">
                 <button type="button" class="btn btn-outline-secondary"><a href="<?php echo e(route('user.edit', $item['id'] )); ?>"> Edit</button>
                 <button type="button" class="btn btn-outline-danger"><a href="<?php echo e(route('user.delete', $item['id'] )); ?>"> Delete </a></button>

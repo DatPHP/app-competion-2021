@@ -12,7 +12,7 @@
             <th cope="col">Username</th>
             <th cope="col">email</th>
             <th cope="col">password</th>
-            <th cope="col">website</th>
+            <th cope="col">status</th>
             <th  cope="col" colspan="4">Action</th>
 
     </tr>
@@ -24,7 +24,7 @@
                 <td>{{ $item['name'] }}</td>
                 <td>{{ $item['email'] }}</td>
                 <td>{{ $item['password'] }}</td>
-                <td>{{ $item['website'] }}</td>
+                <td>{{ $item['status'] }}</td>
                 <td colspan="4">
                 <button type="button" class="btn btn-outline-secondary"><a href="{{ route('user.edit', $item['id'] )}}"> Edit</button>
                 <button type="button" class="btn btn-outline-danger"><a href="{{ route('user.delete', $item['id'] )}}"> Delete </a></button>

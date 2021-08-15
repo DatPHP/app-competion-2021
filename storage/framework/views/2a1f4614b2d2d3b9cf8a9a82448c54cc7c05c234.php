@@ -11,7 +11,7 @@
             <!-----
             <th>Ảnh sản phẩm</th>
             -------> 
-
+            <th>Giới tính</th>
             <th>Đăng bán</th>
             <th>Action</th>
         </tr>
@@ -21,6 +21,7 @@
             <td><?php echo e($p->name); ?></td>
             <td class="text-right"><?php echo e(number_format($p->price)); ?></td>
             <td><?php echo e($p->content); ?></td>
+            <td><?php echo e($p->gender); ?></td>
             <!------
             <td>
                 <img src="<?php echo e(Asset($p->image_path)); ?>" alt="<?php echo e($p->name); ?>" width="120" height="120">

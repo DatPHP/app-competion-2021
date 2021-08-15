@@ -14,14 +14,15 @@ class HomeController extends Controller
 
         /*
         $user = Auth::user();
-
         //echo 'Xin chào User, '. $user->name;
         $username = $user->name;
-
         */ 
 
 
         //code sau gỡ bỏ auth khi hiện homepae 
+
+        
+
 
         if (Auth::check()) {
             // Đã đăng nhập.
@@ -35,6 +36,23 @@ class HomeController extends Controller
             return view('home');  
         }
 
+        
+
+    
+
+
         //return view('home', ['users' => $username]);
+
+
+
+
+            /*
+            $user = Auth::user();
+            echo 'Xin chào User, '. $user->name;
+
+            */
+        
+
     }
 }
+

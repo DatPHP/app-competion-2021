@@ -31,13 +31,17 @@
          </div>
       </div>
 
+     
       <div class="form-group">
             <?php echo Form::label('password', 'NHap Password', array('class' => 'col-sm-2 control-label')); ?>
 
             <div class="col-sm-10">
-
+           
             <?php echo e(Form::input('password', 'password', $user['password']?? '',array('class' => 'form-control','placeholder' => 'Nhap password'))); ?>
 
+          
+
+          
 
            
             </div>
@@ -69,13 +73,20 @@
       </div>
 
       <div class="form-group">
-            <?php echo Form::label('active', 'Active', array('class' => 'col-sm-3 control-label')); ?>
+         <?php echo Form::label('active', 'Active', array('class' => 'col-sm-3 control-label')); ?>
 
-            <div class="col-sm-3">
-            <?php echo Form::checkbox('active', $user['status'] ?? ''); ?>
+         <div class="col-sm-3">
 
-            </div>
-        </div>  
+         <?php if(isset($user) && $user['status'] == 1): ?>
+            <?php echo Form::checkbox('active', $user['active'], true); ?>
+
+         <?php else: ?>
+            <?php echo Form::checkbox('active', 0 , false); ?>
+
+         <?php endif; ?>
+
+         </div>
+      </div>   
 
 
 

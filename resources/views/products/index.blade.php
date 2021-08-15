@@ -29,6 +29,7 @@
             <th>description</th>
             <th>Price</th>
             <th>Date Created</th>
+            <th>Gender</th>
             <th>Actions</th>
         </tr>
         @foreach ($products as $product)
@@ -37,6 +38,7 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->description }}</td>
                 <td>{{ $product->price }}</td>
+                <td>{{ $product->gender }}</td>
                 <td>{{ $product->created_at }}</td>
                 <td>
                     <form action="" method="POST">

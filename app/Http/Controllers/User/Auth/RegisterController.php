@@ -5,10 +5,13 @@ namespace App\Http\Controllers\User\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+//use Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Paginator;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 
 class RegisterController extends Controller
@@ -28,13 +31,14 @@ class RegisterController extends Controller
           'required' => 'Trường :attribute bắt buộc nhập.',
           'email'    => 'Trường :attribute phải có định dạng email'
         ];
+          
+            $validator = Validator::make($request->all(), [
+                    'name' => 'required|max:255',
+                    'email' => 'required|string|email|max:255|unique:users',
+                    'password' => 'required|min:6'
+                ], $messages);
 
-      $validator = Validator::make($request->all(), [
-              'name' => 'required|max:255',
-              'email' => 'required|email|max:255',
-              'password' => 'required|min:6'
-          ], $messages);
-  
+         
           if ($validator->fails()) {
 
               //dd("vo day vi xac thuc sai");
@@ -49,6 +53,7 @@ class RegisterController extends Controller
               {   
                   //dd("vo if");
                   $users = User::find($request->id);
+                 
               }
               else 
               {
@@ -59,7 +64,16 @@ class RegisterController extends Controller
               }
               $users->name = $request->name;
               $users->email = $request->email;
-              $users->password =  bcrypt($request->password);
+
+              if($request->id)
+              {
+                User::find(auth()->user()->id)->update(['password'=> Hash::make($request->password)]);
+              }
+              else 
+              {
+                $users->password =  Hash::make($request->password);
+               
+              }
               $users->status = $active;
               $users->roles = 'regular';
               $users->save();

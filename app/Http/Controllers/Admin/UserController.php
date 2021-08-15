@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Paginator;
 
@@ -44,20 +45,18 @@ class UserController extends Controller
               {   
                   //dd('vo if');
                   $users = User::find($request->id);
+                  
               }
               else 
               {
                 //dd("vo else");
-
                 //dd($request);
-
                 $users = new User;
-               
+                $users->password = Hash::make($request->password);
              
               }
               $users->name = $request->name;
               $users->email = $request->email;
-              $users->password = bcrypt($request->password);
               $users->gender = $request->gender;
               $users->level = $request->level;
               $users->phone = $request->phone;
@@ -93,6 +92,9 @@ class UserController extends Controller
         //var_dump($request->id);
         $id= $request->id;
         $user = User::findorFail($id);
+
+       // dd($user);
+
         return view('user.create', ['user' => $user, 'id'=>$id]);
       }
 

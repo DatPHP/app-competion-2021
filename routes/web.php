@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,9 +33,26 @@ Route::middleware('auth')->group(function (){
 });
 */ 
 
+
+Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name('login');
+
+// go bno loc  
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// gan bo loc  
+
+/*
+Route::middleware('auth')->group(function (){
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+});
+
+*/ 
+
+
 //bỏ bộ lọc 
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+
+//Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -54,6 +72,9 @@ GET /products/{contact}/edit,                       mapped to the edit() method,
 PUT/PATCH /products/{contact},                   mapped to the update() method,
 DELETE /products/{contact},                        mapped to the destroy() method.
 */ 
+
+
+
 
 
 

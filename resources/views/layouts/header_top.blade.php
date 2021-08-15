@@ -43,15 +43,14 @@
               <!-- / header top left -->
               <div class="aa-header-top-right">
                 <ul class="aa-head-top-nav-right">
-                  <li><a href="account.html">My Account:  Hello {{ $users ?? '' }} </a></li>
+                  <li><a href="account.html">
+                       @isset($users)
+                        My Account:  Hello {{ $users ?? '' }} </a>
+                       @endisset
+                  </li>
                   <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
                   <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
                   <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
-
-
-                  
-
-
 
                       @if (Auth::check())
                         <li><a href="{{ route('logout')}}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
@@ -59,11 +58,6 @@
                       <li><a href="" data-toggle="modal" data-target="#login-modal">Login</a></li>
                       @endif
 
-                       <!----
-                      <li><a href="{{ route('login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                      ---->
-
-                  
                 </ul>
               </div>
             </div>

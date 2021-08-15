@@ -26,11 +26,15 @@
          </div>
       </div>
 
+     
       <div class="form-group">
             {!! Form::label('password', 'NHap Password', array('class' => 'col-sm-2 control-label')) !!}
             <div class="col-sm-10">
-
+           
             {{ Form::input('password', 'password', $user['password']?? '',array('class' => 'form-control','placeholder' => 'Nhap password')) }}
+          
+
+          
 
            
             </div>
@@ -59,11 +63,17 @@
       </div>
 
       <div class="form-group">
-            {!! Form::label('active', 'Active', array('class' => 'col-sm-3 control-label')) !!}
-            <div class="col-sm-3">
-            {!! Form::checkbox('active', $user['status'] ?? '') !!}
-            </div>
-        </div>  
+         {!! Form::label('active', 'Active', array('class' => 'col-sm-3 control-label')) !!}
+         <div class="col-sm-3">
+
+         @if (isset($user) && $user['status'] == 1)
+            {!! Form::checkbox('active', $user['active'], true) !!}
+         @else
+            {!! Form::checkbox('active', 0 , false) !!}
+         @endif
+
+         </div>
+      </div>   
 
 
 
