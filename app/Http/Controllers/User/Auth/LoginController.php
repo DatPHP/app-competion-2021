@@ -22,8 +22,13 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             // Authentication was successful...
+
+           // dd("Vô đây 01 ");
+
             return redirect()->route('home');
         }else {
+
+            //dd("Vô đây");
             return redirect()->back()->withInput();
         }
     }

@@ -45,29 +45,34 @@ class UserController extends Controller
               {   
                   //dd('vo if');
                   $users = User::find($request->id);
-                  
+                  $request->current_password = $request->password;
+                  if ($request->current_password == $users->password) {
+                  }
+                  else 
+                  {
+                    $users->password = Hash::make($request->password);
+                  }      
               }
               else 
               {
-                //dd("vo else");
-                //dd($request);
                 $users = new User;
                 $users->password = Hash::make($request->password);
              
               }
+
+
               $users->name = $request->name;
               $users->email = $request->email;
-              $users->gender = $request->gender;
+
+              
               $users->level = $request->level;
-              $users->phone = $request->phone;
-              $users->address = $request->address;
-              $users->gender = $request->gender;
+          
+            
+        
               $users->status = $active;
               $users->roles = 'regular';
               $users->save();
 
-            
-            
              // dd($users);
           
             return redirect('admin/user/list')
@@ -76,25 +81,14 @@ class UserController extends Controller
       }
 
       public function getlist(){
-        /*
-        $user =  new User;
-        $users = $user->simplePaginate(1);
-        */
-
-        $users =  User::paginate(3);
-
-        
+        $users =  User::paginate(10);
         return view('user.users-list', ['users' => $users]);
       }
-
 
       public function edit(Request $request){
         //var_dump($request->id);
         $id= $request->id;
         $user = User::findorFail($id);
-
-       // dd($user);
-
         return view('user.create', ['user' => $user, 'id'=>$id]);
       }
 
