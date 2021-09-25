@@ -1,16 +1,16 @@
-@extends('layouts.app')
+@extends('admin.layouts.default')
+@section('title', 'Admin -Product List')
+
 
 @section('content')
-    <div class="row">
+
+<div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 <h2>Laravel 8 CRUD Example </h2>
             </div>
-
-           <a class="btn btn-primary" href="{{ route('admin.logout') }}" role="button">Link</a>
-
             <div class="pull-right">
-                <a class="btn btn-success" href="products/create" title="Create a product"> <i class="fas fa-plus-circle"></i>
+                <a class="btn btn-success" href="{{ route('admin.product.create') }}" title="Create a product"> <i class="fas fa-plus-circle"></i>
                     </a>
             </div>
         </div>
@@ -18,7 +18,7 @@
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
-            <p></p>
+            <p>{{$message}}</p>
         </div>
     @endif
 
@@ -29,7 +29,6 @@
             <th>description</th>
             <th>Price</th>
             <th>Date Created</th>
-            <th>Gender</th>
             <th>Actions</th>
         </tr>
         @foreach ($products as $product)
@@ -38,25 +37,23 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->description }}</td>
                 <td>{{ $product->price }}</td>
-                <td>{{ $product->gender }}</td>
                 <td>{{ $product->created_at }}</td>
                 <td>
                     <form action="" method="POST">
 
-                        <a href="" title="show">
+                        <a href="{{ route('admin.product.show',$product->id)}}" title="show">
                             <i class="fas fa-eye text-success  fa-lg"></i>
                         </a>
 
-                        <a href="products/{{ $product->id}}/edit">
+                        <a href="{{ route('admin.product.edit',$product->id)}}">
                             <i class="fas fa-edit  fa-lg"></i>
                         </a>
 
                         @csrf
-                        @method('DELETE')
-
-                        <button type="submit" title="delete" style="border: none; background-color:transparent;">
-                            <i class="fas fa-trash fa-lg text-danger"></i>
+                        <button type="button" title="delete" style="border: none; background-color:transparent;">
+                        <a href="{{ route('admin.product.delete', $product->id )}}">  <i class="fas fa-trash fa-lg text-danger"></i></a>
                         </button>
+
                     </form>
                 </td>
             </tr>
@@ -67,3 +64,6 @@
 
 @endsection
 
+
+
+     

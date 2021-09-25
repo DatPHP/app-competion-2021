@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Paginator;
@@ -45,6 +46,7 @@ class UserController extends Controller
               {   
                   //dd('vo if');
                   $users = User::find($request->id);
+
                   $request->current_password = $request->password;
                   if ($request->current_password == $users->password) {
                   }
@@ -52,6 +54,20 @@ class UserController extends Controller
                   {
                     $users->password = Hash::make($request->password);
                   }      
+
+                  $customer = Customer::where('user_id',$request->id )->first();
+                 //dd($customer);
+                  if($customer == null)
+                  {
+                    $customer = new customer;
+                    $customer->user_id = $request->id;
+                  }
+                  $customer->gender = $request->gender;
+                  $customer->firstname = $request->firstname;
+                  $customer->lastname = $request->lastname;
+                  $customer->address =  $request->address;
+                  $customer->phone =  $request->phone;
+                	$customer->save();
               }
               else 
               {
@@ -60,15 +76,9 @@ class UserController extends Controller
              
               }
 
-
               $users->name = $request->name;
               $users->email = $request->email;
-
-              
               $users->level = $request->level;
-          
-            
-        
               $users->status = $active;
               $users->roles = 'regular';
               $users->save();
@@ -88,7 +98,17 @@ class UserController extends Controller
       public function edit(Request $request){
         //var_dump($request->id);
         $id= $request->id;
-        $user = User::findorFail($id);
+       // $users = User::findorFail($id);
+
+       // dd($users);
+
+       //$users = DB::table('users')
+       $users = DB::table('users')
+        ->where('users.id','=',$id)
+        ->leftJoin('customers', 'users.id', '=', 'customers.user_id')
+        ->get();
+        $user = $users[0];
+
         return view('user.create', ['user' => $user, 'id'=>$id]);
       }
 
@@ -97,7 +117,11 @@ class UserController extends Controller
           $id= $request->id;
           $user = User::find($id);
           $user->delete();
-          return redirect('admin/user/list');
+          $customer = Customer::where('user_id',$request->id )->first();
+          $customer->delete();
+
+          return redirect('admin/user/list')
+          ->with('message', 'Xoa thanh cong');
       }
 
 }

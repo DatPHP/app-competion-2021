@@ -19,7 +19,7 @@ class LoginController extends Controller
         //$password = bcrypt($request->password);
         //if (Auth::attempt(['email' => $email, 'password' => $password, 'status' => 1])) {
             
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only(['email', 'password','Status'=>1]);
         if (Auth::attempt($credentials)) {
             // Authentication was successful...
 
