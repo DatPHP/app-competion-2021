@@ -24,7 +24,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.product.update', $product->id) }}" method="POST">
+    <form action="{{ route('admin.product.update', $product->id) }}" enctype="multipart/form-data" method="POST">
         @csrf
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -47,6 +47,22 @@
                         value="{{$product->price}}">
                 </div>
             </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                     <div class="form-group">
+                        {!! Form::label('gender', 'Please choose gender', array('class' => 'col-sm-4 control-label')) !!}
+                        <div class="col-sm-10">
+                           {!!  Form::select('gender', array('men' => 'men', 'woman' => 'woman','kids'=>'kids'), $product->gender) !!}
+                        </div>
+                     </div>
+            </div>
+
+            @if($product->file_path)
+                <img src="{{ URL::asset('images/products/'.$product->file_path) }}" width="250" height="200" >
+            @endif
+                <div class="col-md-6">
+                    <input type="file" name="image" class="form-control">
+                </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

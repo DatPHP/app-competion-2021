@@ -22,7 +22,7 @@
             </ul>
         </div>
     <?php endif; ?>
-    <form action="<?php echo e(route('admin.product.store')); ?>" method="POST" >
+    <form action="<?php echo e(route('admin.product.store')); ?>" method="POST"  enctype="multipart/form-data" >
         <?php echo csrf_field(); ?>
 
         <div class="row">
@@ -45,9 +45,26 @@
                     <input type="number" name="price" class="form-control" placeholder="Put the price">
                 </div>
             </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                     <div class="form-group">
+                        <?php echo Form::label('gender', 'Please choose gender', array('class' => 'col-sm-4 control-label')); ?>
+
+                        <div class="col-sm-10">
+                           <?php echo Form::select('gender', array('men' => 'men', 'woman' => 'woman','kids'=>'kids'), 'men'); ?>
+
+                        </div>
+                     </div>
+            </div>
+
+            <div class="col-md-6">
+                    <input type="file" name="image" class="form-control">
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
+
         </div>
 
     </form>

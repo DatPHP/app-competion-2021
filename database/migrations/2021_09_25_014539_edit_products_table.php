@@ -14,7 +14,7 @@ class EditProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('gender', 255)->nullable()->after('price');
+            $table->string('kind', 255)->nullable()->after('price');
         });
     }
 
@@ -25,8 +25,6 @@ class EditProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('products');
     }
 }

@@ -51,13 +51,36 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'image' => 'mimes:jpeg,bmp,png',
+            
         ]);
 
-        Product::create($request->all());
+      //  Product::create($request->all());
+
+        $product = new Product;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->gender = $request->gender;
+
+       // dd($request);
+       if ($request->hasFile('image')) {
+
+        $imageName = 'product_'.$request->id.'.'.$request->image->extension();  
+     
+        $request->image->move(public_path('images/products'), $imageName);
+
+        $product->file_path = $imageName;
+
+       }
+
+	    $product->save();
+
 
         return redirect()->route('admin.product.list')
             ->with('success', 'Product created successfully.');
+           
     }
 
     /**
@@ -95,16 +118,32 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
+        //dd($request);
+
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'image' => 'mimes:jpeg,bmp,png',
         ]);
 
        // $product->id = $request->id;
         $product = Product::find($request->id);
+        $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
+        $product->gender = $request->gender;
+        
+       // dd($request);
+       if ($request->hasFile('image')) {
+
+        $imageName = 'product_'.$request->id.'.'.$request->image->extension();  
+     
+        $request->image->move(public_path('images/products'), $imageName);
+
+        $product->file_path = $imageName;
+       }
+
 	    $product->save();
 
        // $product->update($request->all());

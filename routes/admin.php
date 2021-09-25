@@ -83,8 +83,10 @@ Route::group(['middleware' => 'is.admin'], function () {
 
 //handle upload image  
 
+/*
 Route::get('image-upload', [ ImageUploadController::class, 'imageUpload' ])->name('image.upload');
 Route::post('image-upload', [ ImageUploadController::class, 'imageUploadPost' ])->name('image.upload.post');
+*/
 
 
 

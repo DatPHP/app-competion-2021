@@ -16,6 +16,9 @@
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
+        @if($product->file_path)
+            <img src="{{ URL::asset('images/products/'.$product->file_path) }}" width="250" height="200" >
+        @endif
             <div class="form-group">
                 <strong>Name:</strong>
                 {{ $product->name }}

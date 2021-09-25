@@ -22,7 +22,10 @@ class Product extends Model
         'name',
         'description',
         'price',
+        'kind',
         'gender',
+        'kind',
+        'file_path',
         'created_at'
     ];
 

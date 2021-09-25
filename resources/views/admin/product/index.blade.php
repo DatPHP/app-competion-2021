@@ -25,6 +25,7 @@
     <table class="table table-bordered table-responsive-lg">
         <tr>
             <th>No</th>
+            <th>Image</th>
             <th>Name</th>
             <th>description</th>
             <th>Price</th>
@@ -34,6 +35,11 @@
         @foreach ($products as $product)
             <tr>
                 <td>{{ $product->id }}</td>
+                <td>
+                     @if($product->file_path)
+                      <img src="{{ URL::asset('images/products/'.$product->file_path) }}" width="250" height="200" alt="{{ $product->name }}" >
+                     @endif
+                </td>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->description }}</td>
                 <td>{{ $product->price }}</td>
