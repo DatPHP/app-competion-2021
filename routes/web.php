@@ -5,6 +5,8 @@ use App\Http\Controllers\User\Auth\LoginController;
 use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Livewire\Click;
+
 
 
 
@@ -38,6 +40,9 @@ Route::match(['get', 'post'], '/login', [LoginController::class, 'login'])->name
 
 // go bno loc  
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/product/filter/gender',[HomeController::class, 'productbygender']);
+Route::get('/product/filter/kind',[HomeController::class, 'productbykind']);
 
 // gan bo loc  
 
@@ -77,6 +82,8 @@ use App\Http\Controllers\ImageuploadController;
 Route::get('image-upload', [ ImageuploadController::class, 'imageUpload' ])->name('image.upload');
 Route::post('image-upload', [ ImageuploadController::class, 'imageUploadPost' ])->name('image.upload.post');
 
+
+Route::get('check-click-event', Click::class);
 
 
 

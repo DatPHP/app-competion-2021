@@ -155,6 +155,246 @@
   <script src="<?php echo e(URL::asset('js/nouislider.js')); ?>"></script>
   <!-- Custom js -->
   <script src="<?php echo e(URL::asset('js/custom.js')); ?>"></script>
+
+  <script>
+
+
+
+       
+
+
+
+          function ProductbyGender(gender)
+          {
+            var _token = $("input[name=_token]").val();
+          var gender = gender;
+          $.ajax({
+              url:"<?php echo e(url('product/filter/gender')); ?>",
+              method:"GET",
+              data:{gender:gender, _token:_token},
+              dataType:"json",
+              success:function(data)
+              {
+                //alert("success");
+                var output = '<ul class="aa-product-catg">';
+                if(data.length > 0)
+                {
+                for(var count = 0; count < data.length; count++)
+                {
+                    let url_image = 'images/products/'+data[count].file_path;
+                    output += '<li>';
+                    output += '<figure>';
+                    output += '<a class="aa-product-img" href="#"><img src="'+url_image+'" alt="polo shirt img" with="250px" height="300px"></a>';
+                    output += '<a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>';
+                    output += '<figcaption>';
+                    output += '<h4 class="aa-product-title"><a href="#">'+data[count].name+'</a></h4>';
+                    output += '<span class="aa-product-price">'+data[count].price+'</span><span class="aa-product-price"><del>$65.50</del></span>';
+                    output += '</figcaption>';
+                    output += '<div class="aa-product-hvr-content">';
+                    output += '<a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>';
+                    output += '<a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>';
+                    output += '<a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>';
+                    output += '</div>';
+                    output += ' <span class="aa-badge aa-sale" href="#">SALE!</span>';
+                  // output += '<td>'+data[count].Country+'</td>';
+                    output += '</li>';
+                }
+                }
+                else
+                {
+                   output += '<li>';
+                   output += '<p colspan="6">No Data Found</p>';
+                   output += '<li>';
+                }
+
+                output += '</ul>';
+                if(data.length > 0)
+                {
+                  output += '<a class="aa-browse-btn" href="#">Browse all Product <span class="fa fa-long-arrow-right"></span></a>';
+                }
+
+                $('#'+gender).html(output);   
+              }
+
+          });
+
+          }
+
+
+
+
+          function ProductbyKind(kind)
+          {
+            var _token = $("input[name=_token]").val();
+          var kind = kind;
+          $.ajax({
+              url:"<?php echo e(url('product/filter/kind')); ?>",
+              method:"GET",
+              data:{kind:kind, _token:_token},
+              dataType:"json",
+              success:function(data)
+              {
+                //alert("success");
+                var output = '<ul class="aa-product-catg">';
+                if(data.length > 0)
+                {
+                for(var count = 0; count < data.length; count++)
+                {
+                    let url_image = 'images/products/'+data[count].file_path;
+                    output += '<li>';
+                    output += '<figure>';
+                    output += '<a class="aa-product-img" href="#"><img src="'+url_image+'" alt="polo shirt img" with="250px" height="300px"></a>';
+                    output += '<a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>';
+                    output += '<figcaption>';
+                    output += '<h4 class="aa-product-title"><a href="#">'+data[count].name+'</a></h4>';
+                    output += '<span class="aa-product-price">'+data[count].price+'</span><span class="aa-product-price"><del>$65.50</del></span>';
+                    output += '</figcaption>';
+                    output += '<div class="aa-product-hvr-content">';
+                    output += '<a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>';
+                    output += '<a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>';
+                    output += '<a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>';
+                    output += '</div>';
+                    output += ' <span class="aa-badge aa-sale" href="#">SALE!</span>';
+                  // output += '<td>'+data[count].Country+'</td>';
+                    output += '</li>';
+                }
+                }
+                else
+                {
+                   output += '<li>';
+                   output += '<p colspan="6">No Data Found</p>';
+                   output += '<li>';
+                }
+
+                output += '</ul>';
+                if(data.length > 0)
+                {
+                  output += '<a class="aa-browse-btn" href="#">Browse all Product <span class="fa fa-long-arrow-right"></span></a>';
+                }
+
+                $('#'+kind).html(output);   
+              }
+
+          });
+
+          }
+
+
+         
+        if($('#kind_01').hasClass('active') )
+        {
+          ProductbyGender(gender='men');
+        }
+
+
+
+
+
+   
+
+      $("#kind_02").on("click", function(){
+         alert("success");
+        // $('#women').html('<h1> Good evening! </h1>');
+      });
+
+      $("#kind_03").on("click", function(){
+         alert("success");
+      });
+
+      $("#kind_04").on("click", function(){
+         alert("success");
+      });
+
+
+
+
+
+        function addTodo() {
+                    var task = $('#task').val();
+                    let _url     = `/todos`;
+                    let _token   = $('meta[name="csrf-token"]').attr('content');
+                    $.ajax({
+                        url: _url+'/create',
+                        type: "POST",
+                        dataType: 'html',
+                        data: {
+                        todo: task,
+                        _token: _token
+                        },
+                    }).done(function(data) {
+                        //alert("abababab");
+                        let todo = JSON.parse(data);
+                     
+                        $('table tbody').append(`
+                            <tr id="todo_${todo.id}">
+                                <td>${todo.id}</td>
+                                <td>${ todo.todo }</td>
+                                <td>
+                                    <a data-id="${ todo.id }" onclick="editTodo(${todo.id})" class="btn btn-info">Edit</a>
+                                    <a data-id="${todo.id}" class="btn btn-danger" onclick="deleteTodo(${todo.id})">Delete</a>
+                                </td>
+                            </tr>
+                        `);
+                        $('#task').val('');
+                        $('#addTodoModal').modal('hide');
+                            //reload page
+                          //  location.reload();
+                    });
+            }
+   
+    function deleteTodo(id) {
+        let url = `/todos/${id}`;
+        let token   = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            data: {
+            _token: token
+            },
+            success: function(response) {
+                $("#todo_"+id).remove();
+            }
+        });
+    }
+    function editTodo(e) {
+        var id  = $(e).data("id");
+        var todo  = $("#todo_"+id+" td:nth-child(2)").html();
+        $("#todo_id").val(id);
+        $("#edittask").val(todo);
+        $('#editTodoModal').modal('show');
+    }
+    function updateTodo() {
+        var task = $('#edittask').val();
+        var id = $('#todo_id').val();
+        let _url     = `/todos/${id}`;
+        let _token   = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            url: _url,
+            type: "PUT",
+            data: {
+                todo: task,
+                _token: _token
+            },
+            success: function(data) {
+                    todo = data
+                    $("#todo_"+id+" td:nth-child(2)").html(todo.todo);
+                    $('#todo_id').val('');
+                    $('#edittask').val('');
+                    $('#editTodoModal').modal('hide');
+            },
+            error: function(response) {
+                todo = response;
+                $('#taskError').text(response.responseJSON.errors.todo);
+            }
+        });
+    }
+  
+</script>
+
   </body>
+
+<?php echo \Livewire\Livewire::scripts(); ?>
+
+
 </html>
 <?php /**PATH /var/www/html/myshop/resources/views/home.blade.php ENDPATH**/ ?>

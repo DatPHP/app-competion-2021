@@ -47,11 +47,23 @@
                         value="{{$product->price}}">
                 </div>
             </div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                     <div class="form-group">
+                        {!! Form::label('kind', 'Please choose kind', array('class' => 'col-sm-4 control-label')) !!}
+                        <div class="col-sm-10">
+                           {!!  Form::select('kind', array('sport' => 'sport', 'shoes' => 'shoes','bag'=>'bag'), 'shoes') !!}
+                        </div>
+                     </div>
+            </div>
+
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                      <div class="form-group">
                         {!! Form::label('gender', 'Please choose gender', array('class' => 'col-sm-4 control-label')) !!}
                         <div class="col-sm-10">
-                           {!!  Form::select('gender', array('men' => 'men', 'woman' => 'woman','kids'=>'kids'), $product->gender) !!}
+                           {!!  Form::select('gender', array('men' => 'men', 'women' => 'women','kids'=>'kids'), $product->gender) !!}
                         </div>
                      </div>
             </div>

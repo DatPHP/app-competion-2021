@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
-
+use Illuminate\Support\Facades\File;
 
 use Validator;
 use Illuminate\Support\Facades\DB;
@@ -63,11 +63,12 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->gender = $request->gender;
+        $product->kind = $request->kind;
 
        // dd($request);
        if ($request->hasFile('image')) {
 
-        $imageName = 'product_'.$request->id.'.'.$request->image->extension();  
+        $imageName = 'product_'.$product->id.'.'.$request->image->extension();  
      
         $request->image->move(public_path('images/products'), $imageName);
 
@@ -133,6 +134,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->gender = $request->gender;
+        $product->kind = $request->kind;
         
        // dd($request);
        if ($request->hasFile('image')) {
@@ -163,6 +165,13 @@ class ProductController extends Controller
         $product = Product::find($id);
 
        // dd($id);
+     
+     
+       $image_path = 'images/products/'.$product->file_path; // the value is : localhost/project/image/filename.format
+       if(File::exists($image_path)) {
+           File::delete($image_path);
+       }
+
 
         $product->delete();
 
