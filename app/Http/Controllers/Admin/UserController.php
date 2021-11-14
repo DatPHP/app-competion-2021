@@ -100,13 +100,15 @@ class UserController extends Controller
         $id= $request->id;
        // $users = User::findorFail($id);
 
-       // dd($users);
+    
 
        //$users = DB::table('users')
        $users = DB::table('users')
         ->where('users.id','=',$id)
         ->leftJoin('customers', 'users.id', '=', 'customers.user_id')
         ->get();
+        
+        // dd($users);
         $user = $users[0];
 
         return view('user.create', ['user' => $user, 'id'=>$id]);

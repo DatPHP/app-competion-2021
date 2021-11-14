@@ -22,6 +22,8 @@
                   <span class="aa-cart-notify">2</span>
                 </a>
                 <div class="aa-cartbox-summary">
+
+                  <!-----
                   <ul>
                     <li>
                       <a class="aa-cartbox-img" href="#"><img src="img/woman-small-2.jpg" alt="img"></a>
@@ -48,6 +50,44 @@
                       </span>
                     </li>
                   </ul>
+
+                  ------> 
+
+                   <!-------------------------shopping cart-------------------------------->
+                   <div class="shoppingcard">
+                                <div class="dropdown ">
+                                      <span>
+                                          <i class="fa fa-cart-plus" style="font-size:48px;color:black"></i>
+                                          <span class="dropdowncart" style="color: red"></span>
+                                      </span>
+                                        <div class="dropdown-content orange">
+
+                                            <div id="empty-cart" class="emtrycart">
+                                                <p>Empty Cart</p>
+                                            </div>
+
+                                            <div id="exist-cart" style="display: none">
+
+                                              <div class="row">
+                                                <table class="table " id="table-products">
+                                                            <tbody > </tbody>
+                                                </table>
+                                                </div>
+                                                <div class="taskcart">
+                                                  <span>
+                                                  <button class="btn btn-lg btn btn-danger" id="button-clear" style="margin: auto">Clear cart</button>
+                                                      </span>
+                                                          <span class="submit">
+                                                          <button class="btn btn-default btn-lg" style="margin: auto">  <a href="http://localhost:8000/cart/form">Checkout</a> </button>
+                                                      </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                  </div>
+                    </div>
+
+                    <!------------------------->
                   <a class="aa-cartbox-checkout aa-primary-btn" href="checkout.html">Checkout</a>
                 </div>
               </div>
