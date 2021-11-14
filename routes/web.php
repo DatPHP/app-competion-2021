@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Customer\Auth\LoginController;
 use App\Http\Controllers\Customer\Auth\RegisterController;
 use App\Http\Controllers\Customer\HomeController;
+use App\Http\Controllers\Customer\BlogPostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Livewire\Click;
 
@@ -41,6 +42,19 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product/filter/gender',[HomeController::class, 'productbygender']);
 Route::get('/product/filter/kind',[HomeController::class, 'productbykind']);
 Route::get('product/detail/{id}', [HomeController::class, 'productbyid'])->name('product.detail'); 
+
+Route::get('/blog/landing', [BlogPostController::class, 'landing'])->name('blog.landing');
+Route::get('/blog', [BlogPostController::class, 'index']);
+
+Route::get('/blog/{blogPost}', [BlogPostController::class, 'show']);
+
+
+
+Route::get('/blog/create/post', [BlogPostController::class, 'create']); //shows create post form
+Route::post('/blog/create/post', [BlogPostController::class, 'store']); //saves the created post to the databse
+Route::get('/blog/{blogPost}/edit', [BlogPostController::class, 'edit']); //shows edit post form
+Route::put('/blog/{blogPost}/edit', [BlogPostController::class, 'update']); //commits edited post to the database 
+Route::delete('/blog/{blogPost}', [BlogPostController::class, 'destroy']); //deletes post from the database
 
 // gan bo loc  
 
