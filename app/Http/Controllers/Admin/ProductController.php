@@ -5,24 +5,26 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\File;
+
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Paginator;
 
-
 class ProductController extends Controller
 {
-         /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $username = session('users');
-        $products = Product::paginate(3);
-       // dd($products);
-        return view('admin.product.list', ['products' => $products,'username' => $username]);
+    {
+       // $products = Product::latest()->paginate(2);
+        //dd($products);
+        $products = Product::paginate(10);
+        return view('admin.product.index', compact('products'))
+            ->with('i', (request()->input('page', 1) - 1) * 4);
     }
 
     /**
@@ -35,22 +37,6 @@ class ProductController extends Controller
         return view('admin.product.create');
     }
 
-        /**
-     * Show the form for editing a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function edit(Request $request)
-    {
-         //var_dump($request->id);
-         $id= $request->id;
-         $product = Product::findorFail($id);
-         return view('admin.product.create', ['product' => $product, 'id'=>$id]);
-    }
-
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -59,55 +45,137 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-    
-        $messages = [
-            'required' => 'Trường :attribute bắt buộc nhập.',
-            'numeric'    => 'Trường :số tiền nhập phải là số '
-        ];
-        $validator = Validator::make($request->all(), [
-                'name'     => 'required',
-                'price'    => 'required',
-                'content'  => 'required'
 
-            ], $messages);
+       // dd($request);
 
-            if ($validator->fails()) {
-                dd("Vo day");
-                return redirect('admin/product/create')
-                        ->withErrors($validator)
-                        ->withInput();
-            } else {
-                $active = $request->has('active')? 1 : 0;
-                if($request->id)
-                {   
-                    //dd('vo if');
-                    $Product = Product::find($request->id);
-                }
-                else 
-                {
-                //dd("vo else");
-                $Product = new Product;
-                }
-                $Product->name = $request->name;
-                $Product->price = $request->price;
-                $Product->content = $request->content;
-                $Product->active = $active;
-                $Product->save();
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'image' => 'mimes:jpeg,bmp,png',
+            
+        ]);
 
-            //return view('admin.product.list');
+      //  Product::create($request->all());
 
-            return redirect('admin/product/list')
-              ->with('message', 'Đăng ký thành công.');
+        $product = new Product;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->gender = $request->gender;
+        $product->kind = $request->kind;
 
-            }
+       // dd($request);
+       if ($request->hasFile('image')) {
 
-         
+        $imageName = 'product_'.$product->id.'.'.$request->image->extension();  
+     
+        $request->image->move(public_path('images/products'), $imageName);
+
+        $product->file_path = $imageName;
+
+       }
+
+	    $product->save();
+
+
+        return redirect()->route('admin.product.list')
+            ->with('success', 'Product created successfully.');
+           
     }
 
-    public function delete(Request $request){
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $product = Product::find($id);
+        return view('admin.product.show', compact('product'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //dd($product);
+
+        $product = Product::find($id);
+
+        return view('admin.product.edit', compact('product'));
+    }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
+    {
+        //dd($request);
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'image' => 'mimes:jpeg,bmp,png',
+        ]);
+
+       // $product->id = $request->id;
+        $product = Product::find($request->id);
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->gender = $request->gender;
+        $product->kind = $request->kind;
+        
+       // dd($request);
+       if ($request->hasFile('image')) {
+
+        $imageName = 'product_'.$request->id.'.'.$request->image->extension();  
+     
+        $request->image->move(public_path('images/products'), $imageName);
+
+        $product->file_path = $imageName;
+       }
+
+	    $product->save();
+
+       // $product->update($request->all());
+
+        return redirect()->route('admin.product.list')
+            ->with('success', 'Product updated successfully');
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
         $id= $request->id;
-        $user = Product::find($id);
-        $user->delete();
-        return redirect('admin/product/list');
+        $product = Product::find($id);
+
+       // dd($id);
+     
+     
+       $image_path = 'images/products/'.$product->file_path; // the value is : localhost/project/image/filename.format
+       if(File::exists($image_path)) {
+           File::delete($image_path);
+       }
+
+
+        $product->delete();
+
+        return redirect()->route('admin.product.list')
+            ->with('success', 'Product deleted successfully');
     }
 }

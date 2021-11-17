@@ -1,52 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
+<?php $__env->startSection('title', 'Home'); ?>
+<?php $__env->startSection('content'); ?>
+      <!-- Start slider -->
+      <?php echo $__env->make('home.slider_banner', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <!-- / slider -->
+      <!-- Start Promo section -->
+      <?php echo $__env->make('home.promo_banner', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <!-- / Promo section -->
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Hello  <?php echo e($users ?? ''); ?>  </a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Page 1-1</a></li>
-          <li><a href="#">Page 1-2</a></li>
-          <li><a href="#">Page 1-3</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Page 2</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
+      <!-- Products section -->
+      <?php echo $__env->make('home.product_session', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <!-- / Products section -->
+      <!-- banner section -->
+      <?php echo $__env->make('home.banner', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <!-- popular section -->
+      <?php echo $__env->make('home.popular_category', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <!-- / popular section -->
+      <!-- Support section -->
+      <?php echo $__env->make('home.support', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <!-- / Support section -->
+      <!-- Testimonial -->
+      <?php echo $__env->make('home.testimonial', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <!-- / Testimonial -->
 
-      <?php if(Auth::check()): ?>
-         <li><a href="<?php echo e(route('logout')); ?>"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-      <?php else: ?>
-
-      <li><a href="<?php echo e(route('register')); ?>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="<?php echo e(route('login')); ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-
-      <?php endif; ?>
-
-
-    </ul>
-  </div>
-</nav>
-  
-<div class="container">
-  <h3>Right Aligned Navbar</h3>
-  <p>The .navbar-right class is used to right-align navigation bar buttons.</p>
-</div>
-
-</body>
-</html>
-<?php /**PATH /var/www/html/myshop/resources/views/home.blade.php ENDPATH**/ ?>
+      <!-- Client Brand -->
+      <?php echo $__env->make('home.client_brand', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+      <!-- / Client Brand -->
+  <?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/myshop/resources/views/home.blade.php ENDPATH**/ ?>
