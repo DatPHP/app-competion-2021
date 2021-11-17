@@ -1,3 +1,5 @@
+<?php $__env->startSection('title', 'Blog List'); ?>
+
 <?php $__env->startSection('content'); ?>
 
 <div class="container">
@@ -40,4 +42,4 @@
 </div>
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('customer.BlogPost.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/myshop/resources/views/customer/BlogPost/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('customer.layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/myshop/resources/views/customer/BlogPost/edit.blade.php ENDPATH**/ ?>

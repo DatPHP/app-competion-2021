@@ -1,4 +1,7 @@
-@extends('customer.BlogPost.app')
+
+@extends('customer.layouts.main')
+@section('title', 'Blog List')
+
 
 @section('content')
     <div class="container">

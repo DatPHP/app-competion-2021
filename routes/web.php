@@ -42,14 +42,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product/filter/gender',[HomeController::class, 'productbygender']);
 Route::get('/product/filter/kind',[HomeController::class, 'productbykind']);
 Route::get('product/detail/{id}', [HomeController::class, 'productbyid'])->name('product.detail'); 
+Route::get('check', [HomeController::class, 'check'])->name('product.check'); 
 
 Route::get('/blog/landing', [BlogPostController::class, 'landing'])->name('blog.landing');
 Route::get('/blog', [BlogPostController::class, 'index']);
-
 Route::get('/blog/{blogPost}', [BlogPostController::class, 'show']);
-
-
-
 Route::get('/blog/create/post', [BlogPostController::class, 'create']); //shows create post form
 Route::post('/blog/create/post', [BlogPostController::class, 'store']); //saves the created post to the databse
 Route::get('/blog/{blogPost}/edit', [BlogPostController::class, 'edit']); //shows edit post form

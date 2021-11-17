@@ -8,27 +8,22 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use Illuminate\Http\Response;
 
+use App\Repositories\Product\ProductRepositoryInterface;
+
+
 class HomeController extends Controller
 {   public $user;
 
-    public function __construct()
+
+     /**
+     * @var PostRepositoryInterface|\App\Repositories\Repository
+     */
+    protected $productRepo;
+
+    public function __construct(ProductRepositoryInterface $productRepo)
     {
-        if (Auth::check()) {
-            // Đã đăng nhập.
-            $user = Auth::user();
 
-            dd($user);
-
-            $username = $user->name;
-
-            $this->user = $username;
-           // return view('customer.home', ['users' => $username]);
-
-        } else {
-           // return view('customer.home');  
-        }
-
-        
+        $this->productRepo = $productRepo;
     }
 
 
@@ -48,6 +43,17 @@ class HomeController extends Controller
 
     }
 
+    public function check()
+    {
+        $products = $this->productRepo->find(7);
+
+        dd($products);
+
+        return view('home.products', ['products' => $products]);
+
+    }
+
+
     public function productbygender(Request $request)
     {
         $gender = $request->gender;
@@ -66,14 +72,17 @@ class HomeController extends Controller
 
     public function productbyid($id)
     {
-        $product = Product::find($id);
+        //$product = Product::find($id);
 
         //dd($product);
+        $product = $this->productRepo->find($id);
       
         return view('customer.product_detail', compact('product'));
         //return response()->json($products);
 
     }
+
+
 
   
 
