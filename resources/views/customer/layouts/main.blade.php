@@ -83,6 +83,9 @@
     <!-- / header bottom  -->
   </header>
   <!-- / header section -->
+
+
+
   <!-- menu -->
   @include('customer.layouts.menu_top')
   <!-- / menu -->
@@ -148,7 +151,7 @@
                 output += '<figure>';
                 output += '<a class="aa-product-img" href="#"><img src="'+url_image+'" alt="polo shirt img" with="250px" height="300px"></a>';
               
-                output += '<button class="aa-add-card-btn" id="'+data[count].id+'" data-name="'+data[count].id+'" data-price="'+data[count].price+'"><span class="fa fa-shopping-cart"></span>Add To Cart</button>';
+                output += '<button class="aa-add-card-btn" id="'+data[count].id+'"><a href="add-to-cart/'+data[count].id+'"><span class="fa fa-shopping-cart"></span>Add To Cart</a></button>';
                 output += '<figcaption>';
                 output += '<h4 class="aa-product-title"><a href="/product/detail/'+data[count].id+'">'+data[count].name+'</a></h4>';
                 output += '<span class="aa-product-price">'+data[count].price+'</span><span class="aa-product-price"><del>$65.50</del></span>';
@@ -203,13 +206,13 @@
                 let url_image = 'images/products/'+data[count].file_path;
                 output += '<li>';
                 output += '<figure>';
-                output += '<a class="aa-product-img" href="#"><img src="'+url_image+'" alt="polo shirt img" with="250px" height="300px"></a>';
+                output += '<a class="aa-product-img" href=""><img src="'+url_image+'" alt="polo shirt img" with="250px" height="300px"></a>';
                
                  /*
                 output += '<a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>';
                 */
 
-                output += '<button class="aa-add-card-btn"  id="'+data[count].id+'" data-name="'+data[count].id+'" data-price="'+data[count].price+'"><span class="fa fa-shopping-cart"></span>Add To Cart</button>';
+                output += '<button class="aa-add-card-btn"  id="'+data[count].id+'"><a href="add-to-cart/'+data[count].id+'"><span class="fa fa-shopping-cart"></span>Add To Cart</a></button>';
 
                 output += '<figcaption>';
 
@@ -251,6 +254,13 @@
       }
 
 </script>
+
+
+
+   
+
+@yield('scripts')
+
 
   </body>
 

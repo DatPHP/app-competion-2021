@@ -1,5 +1,13 @@
 <section id="menu">
+<?php if(session('success')): ?>
+        <div class="alert alert-success">
+            <strong>Success!</strong>  <?php echo e(session('success')); ?>
+
+        </div>
+    <?php endif; ?>
     <div class="container">
+  
+
       <div class="menu-area">
         <!-- Navbar -->
         <div class="navbar navbar-default" role="navigation">

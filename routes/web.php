@@ -5,7 +5,7 @@ use App\Http\Controllers\Customer\Auth\LoginController;
 use App\Http\Controllers\Customer\Auth\RegisterController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\BlogPostController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Customer\ProductController;
 use App\Http\Livewire\Click;
 
 
@@ -94,8 +94,16 @@ Route::post('image-upload', [ ImageuploadController::class, 'imageUploadPost' ])
 
 Route::get('check-click-event', Click::class);
 
+// shooping cart 
 
+/* 
+Route::get('/', [ProductController::class, 'index']);  
+*/ 
 
+Route::get('cart', [ProductController::class, 'cart'])->name('cart');
+Route::get('add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('add.to.cart');
+Route::patch('update-cart', [ProductController::class, 'update'])->name('update.cart');
+Route::delete('remove-from-cart', [ProductController::class, 'remove'])->name('remove.from.cart');
 
 
 

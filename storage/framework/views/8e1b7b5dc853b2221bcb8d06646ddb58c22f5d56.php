@@ -25,4 +25,5 @@
       <?php echo $__env->make('customer.home.client_brand', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
       <!-- / Client Brand -->
   <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('customer.layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/myshop/resources/views/customer/home.blade.php ENDPATH**/ ?>

@@ -1,5 +1,12 @@
 <section id="menu">
+@if(session('success'))
+        <div class="alert alert-success">
+            <strong>Success!</strong>  {{ session('success') }}
+        </div>
+    @endif
     <div class="container">
+  
+
       <div class="menu-area">
         <!-- Navbar -->
         <div class="navbar navbar-default" role="navigation">
