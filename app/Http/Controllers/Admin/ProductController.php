@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Categorie;
 use Illuminate\Support\Facades\File;
 
 use Validator;
@@ -34,7 +35,15 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+
+       // Categorie
+        $categories = Categorie::all()->pluck('categories_name');
+       // dd($categories);
+      
+
+       //dd($categories);
+
+        return view('admin.product.create', compact('categories'));
     }
 
     /**
@@ -63,7 +72,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->gender = $request->gender;
-        $product->kind = $request->kind;
+        $product->categories_id = $request->kind;
 
        // dd($request);
        if ($request->hasFile('image')) {
@@ -108,7 +117,9 @@ class ProductController extends Controller
 
         $product = Product::find($id);
 
-        return view('admin.product.edit', compact('product'));
+        $categories = Categorie::all()->pluck('categories_name');
+        return view('admin.product.edit', ['product'=>$product,'categories'=>$categories]);
+        
     }
     /**
      * Update the specified resource in storage.
@@ -134,7 +145,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->gender = $request->gender;
-        $product->kind = $request->kind;
+        $product->categories_id = $request->kind;
         
        // dd($request);
        if ($request->hasFile('image')) {

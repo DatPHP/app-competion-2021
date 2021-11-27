@@ -51,7 +51,7 @@
                      <div class="form-group">
                         {!! Form::label('kind', 'Please choose kind', array('class' => 'col-sm-4 control-label')) !!}
                         <div class="col-sm-10">
-                           {!!  Form::select('kind', array('sport' => 'sport', 'shoes' => 'shoes','bag'=>'bag'), 'shoes') !!}
+                           {!!  Form::select('kind', $categories, '2') !!}
                         </div>
                      </div>
             </div>
@@ -60,7 +60,7 @@
                      <div class="form-group">
                         {!! Form::label('gender', 'Please choose gender', array('class' => 'col-sm-4 control-label')) !!}
                         <div class="col-sm-10">
-                           {!!  Form::select('gender', array('men' => 'men', 'woman' => 'woman','kids'=>'kids'), 'men') !!}
+                           {!!  Form::select('gender', array('other' => 'other','men' => 'men', 'woman' => 'woman','kids'=>'kids'), 'other') !!}
                         </div>
                      </div>
             </div>

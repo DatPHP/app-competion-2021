@@ -53,7 +53,7 @@
                         <?php echo Form::label('kind', 'Please choose kind', array('class' => 'col-sm-4 control-label')); ?>
 
                         <div class="col-sm-10">
-                           <?php echo Form::select('kind', array('sport' => 'sport', 'shoes' => 'shoes','bag'=>'bag'), 'shoes'); ?>
+                           <?php echo Form::select('kind', $categories, $product->categories_id); ?>
 
                         </div>
                      </div>
@@ -65,7 +65,7 @@
                         <?php echo Form::label('gender', 'Please choose gender', array('class' => 'col-sm-4 control-label')); ?>
 
                         <div class="col-sm-10">
-                           <?php echo Form::select('gender', array('men' => 'men', 'women' => 'women','kids'=>'kids'), $product->gender); ?>
+                           <?php echo Form::select('gender', array('other'=>'other','men' => 'men', 'women' => 'women','kids'=>'kids'), $product->gender); ?>
 
                         </div>
                      </div>

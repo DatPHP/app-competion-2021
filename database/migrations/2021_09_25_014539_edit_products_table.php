@@ -14,7 +14,7 @@ class EditProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('kind', 255)->nullable()->after('price');
+            $table->renameColumn('kind', 'categories_id');
         });
     }
 

@@ -86,10 +86,7 @@ GET /products/{contact}/edit,                       mapped to the edit() method,
 PUT/PATCH /products/{contact},                   mapped to the update() method,
 DELETE /products/{contact},                        mapped to the destroy() method.
 */ 
-use App\Http\Controllers\ImageuploadController;
 
-Route::get('image-upload', [ ImageuploadController::class, 'imageUpload' ])->name('image.upload');
-Route::post('image-upload', [ ImageuploadController::class, 'imageUploadPost' ])->name('image.upload.post');
 
 
 Route::get('check-click-event', Click::class);

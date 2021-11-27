@@ -116,6 +116,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">show all :</h6>
                         <a class="collapse-item" href="<?php echo e(route('admin.product.list')); ?>">Products</a>
+                        <a class="collapse-item" href="<?php echo e(route('categories.index')); ?>">Categories</a>
                         <a class="collapse-item" href="<?php echo e(route('admin.user.list')); ?>"> Users </a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
